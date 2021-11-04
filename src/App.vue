@@ -12,23 +12,27 @@
       </div>
       <displayPagination v-if="pageType=='pagination'"/>
       <displayScroll v-if="pageType=='scroll'"/>
+      <loadingModal v-show="showModal"/>
    </div>
 </template>
 
 <script>
 import displayPagination from './components/displayPagination.vue'
 import displayScroll from './components/displayScroll.vue'
+import loadingModal from './components/loadingModal.vue'
 import axios from 'axios';
 import './assets/style.css';
-
 export default {
     name: 'App',
     components: {
         displayPagination,
-        displayScroll
+        displayScroll,
+        loadingModal
     },
     data() {
         return {
+            //loading modal
+            showModal:false,
             //page display type
             pageType: 'pagination',
             //max number of pokemon to be displayed
@@ -45,6 +49,7 @@ export default {
         }
     },
     created() {
+        this.showModal = true
         //initalize number of pages needed for pagination
         this.initPagination()
         //call pokeAPI to get all pokemon in the library
@@ -90,6 +95,9 @@ export default {
                         this.scrollArray = JSON.parse(JSON.stringify(this.pokedexArray))
                         //the first page of scroll display should show 50 pokemon
                         this.scrollArray = this.scrollArray.splice(0, 50)
+
+                        //close modal
+                        this.showModal = false
                     }
                 })
         },
