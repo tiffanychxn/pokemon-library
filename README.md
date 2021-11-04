@@ -1,4 +1,9 @@
 # pokemon-library
+This application displays all original 150 pokemon, along with height and weight. There are two types of displays available; pagination and scroll.
+Hover over pokemon names to see details.
+
+Dependencies:
+- Axios
 
 ## Project setup
 ```
